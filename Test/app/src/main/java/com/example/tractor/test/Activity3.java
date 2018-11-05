@@ -1,85 +1,124 @@
 package com.example.tractor.test;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import static com.example.tractor.test.R.id.boton2_1;
-import static com.example.tractor.test.R.id.boton3_1;
-import static com.example.tractor.test.R.id.boton3_2;
-import static com.example.tractor.test.R.id.boton3_3;
-import static com.example.tractor.test.R.id.boton3_4;
-import static com.example.tractor.test.R.id.boton3_5;
-import static com.example.tractor.test.R.id.boton3_6;
+import android.widget.ImageButton;
 
 public class Activity3 extends AppCompatActivity {
+    public MediaPlayer media;
+    Activity3 context;
+    ImageButton boten;
+    private Button boton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
-
-        Button mi3boton1 = (Button) findViewById(boton3_1);
-        final MediaPlayer np = MediaPlayer.create(this, R.raw.iago);
-        mi3boton1.setOnClickListener(new View.OnClickListener() {
+        boten = (ImageButton)findViewById(R.id.boton1);
+        boten.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                np.start();
-            }
+            public void onClick(View v) {
+                context.startSound(R.raw.sample);
 
-        });
-        Button mi3boton2 = (Button) findViewById(boton3_2);
-        final MediaPlayer ap = MediaPlayer.create(this, R.raw.lapatita);
-        mi3boton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ap.start();
             }
-
         });
 
-        Button mi3boton3 = (Button) findViewById(boton3_3);
-        final MediaPlayer bp = MediaPlayer.create(this, R.raw.cristian);
-        mi3boton3.setOnClickListener(new View.OnClickListener() {
+        boton = (Button)findViewById(R.id.volver);
+        boton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                bp.start();
+            public void onClick(View v) {
+                openActivity3();
             }
-
         });
 
-        Button mi3boton4 = (Button) findViewById(boton3_4);
-        final MediaPlayer cp = MediaPlayer.create(this, R.raw.boliviano);
-        mi3boton4.setOnClickListener(new View.OnClickListener() {
+        boten = (ImageButton)findViewById(R.id.boton2);
+        boten.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                cp.start();
+            public void onClick(View v) {
+                context.startSound(R.raw.boliviano);
             }
-
         });
 
-        Button mi3boton5 = (Button) findViewById(boton3_5);
-        final MediaPlayer dp = MediaPlayer.create(this, R.raw.pezon);
-        mi3boton5.setOnClickListener(new View.OnClickListener() {
+        boten = (ImageButton)findViewById(R.id.boton3);
+        boten.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                dp.start();
+            public void onClick(View v) {
+                context.startSound(R.raw.cristian);
             }
-
         });
 
-        Button mi3boton6 = (Button) findViewById(boton3_6);
-        final MediaPlayer ep = MediaPlayer.create(this, R.raw.lacon);
-        mi3boton6.setOnClickListener(new View.OnClickListener() {
+        boten = (ImageButton)findViewById(R.id.boton4);
+        boten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startSound(R.raw.lacon);
+            }
+        });
+
+        boten = (ImageButton)findViewById(R.id.boton5);
+        boten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startSound(R.raw.lapatita);
+            }
+        });
+
+        boten = (ImageButton)findViewById(R.id.boton6);
+        boten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startSound(R.raw.iago);
+            }
+        });
+
+        Button pausa = (Button)findViewById(R.id.pause);
+        pausa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ep.start();
+                if(media.isPlaying()){
+                    media.pause();
+                }
             }
+        });
 
+        Button play = (Button)findViewById(R.id.play);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(media.isLooping()) {
+                    media.start();
+                    }
+                else {
+                    media.start();
+                }
+            }
         });
 
 
     }
+
+    public void startSound(int song){
+        System.out.println("startSound");
+        if (this.media != null) {
+            if (this.media.isPlaying()) {
+                this.media.stop();
+            }
+            this.media.release();
+
+        }
+        this.media = MediaPlayer.create(this, song);
+        this.media.start();
+    }
+    public void openActivity3 (){
+        Intent intent = new Intent(this, Activity2.class);
+        startActivity(intent);
+
+    }
+
+
 }

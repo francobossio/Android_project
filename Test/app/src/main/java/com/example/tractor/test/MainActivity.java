@@ -29,30 +29,6 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
-
-        Button miboton = (Button)findViewById(R.id.boton1);
-        Button miboton2 = (Button) findViewById(R.id.boton2);
-        final TextView mitexto = (TextView) findViewById(R.id.texto1);
-        final MediaPlayer np = MediaPlayer.create(this, R.raw.sample);
-        miboton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                np.start();
-                mitexto.setText("ELEGISTE A VICENTE");
-                mitexto.setTextColor(mitexto.getContext().getResources().getColor(R.color.blue));
-                Toast texto1 =
-                        Toast.makeText(getApplicationContext(), "LOL", Toast.LENGTH_SHORT);
-                texto1.show();
-
-            }
-        });
-        miboton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mitexto.setText("ELEGISTE EL ROJO");
-                mitexto.setTextColor(mitexto.getContext().getResources().getColor(R.color.red));
-            }
-        });
     }
     public void openActivity2() {
         Intent intent = new Intent(this, Activity2.class);
